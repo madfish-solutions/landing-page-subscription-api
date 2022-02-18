@@ -4,17 +4,20 @@ const consola = require("consola");
 const { PORT } = require("./config");
 const fetch = require("node-fetch");
 const { getSubscriptionRequest } = require("./utils/get-subscription-request");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json({ limit: "2000kb" }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.get("/healthz", (_, res) => {
   res.send({ message: "OK" }).status(200);
 });
 
 app.post("/", async (req, res) => {
-  const { email, name } = req.body;
+  const { EMAIL: email, NAME: name } = req.body;
 
   const { url, config } = getSubscriptionRequest(email, name);
 
