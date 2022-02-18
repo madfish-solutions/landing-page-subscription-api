@@ -3,6 +3,7 @@ const cors = require("cors");
 const consola = require("consola");
 const { port } = require("./config");
 const fetch = require("node-fetch");
+const { getSubscriptionRequest } = require("./utils/get-subscription-request");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.get("/healthz", (_, res) => {
 app.post("/", async (req, res) => {
   const { email, name } = req.body;
 
-  const { data, url, config } = getSubscriptionRequest(email, name);
+  const { url, config } = getSubscriptionRequest(email, name);
 
   fetch(url, config)
     .then((response) => {

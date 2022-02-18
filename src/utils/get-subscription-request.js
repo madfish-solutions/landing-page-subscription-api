@@ -1,4 +1,4 @@
-export const getSubscriptionRequest = (email, name) => {
+const getSubscriptionRequest = (email, name) => {
   const data = JSON.stringify({
     NAME: name || email,
     EMAIL: email,
@@ -12,4 +12,8 @@ export const getSubscriptionRequest = (email, name) => {
     body: data,
   };
   return { data, url, config };
+};
+
+module.exports = {
+  getSubscriptionRequest,
 };
