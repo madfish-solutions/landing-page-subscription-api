@@ -32,33 +32,8 @@ app.post("/", async (req, res) => {
       consola.error(e);
       res.send({ message: "Network error" }).status(400);
     });
-
-  try {
-    for (const slug of req.body) {
-      const { address, tokenId } = fromTokenSlug(slug);
-
-      if (!address || !isValidContract(address) || !isNumeric(tokenId)) {
-        consola.error(
-          `Validation failed for contract ${address} and tokenId:${tokenId}`
-        );
-        return res
-          .send({
-            message: "Please, provide a valid token address and token id",
-          })
-          .status(400);
-      }
-
-      promises.push(getMetadata(address, tokenId).catch(() => null));
-    }
-
-    res.json(await Promise.all(promises));
-  } catch (e) {
-    res
-      .send({ message: "Could not fetch metadata for provided tokens" })
-      .status(400);
-  }
 });
 
 app.listen(port, () =>
-  consola.success(`Tezos token metadata server is listening on port ${port}`)
+  consola.success(`Subscription proxy server is listening on port ${port}`)
 );
