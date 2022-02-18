@@ -18,6 +18,10 @@ app.get("/healthz", (_, res) => {
 
 app.post("/", async (req, res) => {
   const { EMAIL: email, NAME: name } = req.body;
+  if (!email || !name) {
+    res.send({ message: "Validation error" }).status(400);
+    return;
+  }
 
   const { url, config } = getSubscriptionRequest(email, name);
 
