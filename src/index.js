@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const consola = require("consola");
-const { port } = require("./config");
+const { PORT } = require("./config");
 const fetch = require("node-fetch");
 const { getSubscriptionRequest } = require("./utils/get-subscription-request");
 
@@ -35,6 +35,6 @@ app.post("/", async (req, res) => {
     });
 });
 
-app.listen(port, () =>
-  consola.success(`Subscription proxy server is listening on port ${port}`)
+app.listen(PORT, () =>
+  consola.success(`Subscription proxy server is listening on port ${PORT}`)
 );
