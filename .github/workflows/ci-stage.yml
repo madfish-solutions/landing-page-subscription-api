@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ stage ]
+    branches: [ master ]
 
 
 name: Build docker
@@ -9,9 +9,9 @@ env:
   AWS_REGION: eu-central-1
   ECR_REPOSITORY: landing-page-subscription-api
   HELM_REPO: github.com/madfish-solutions/tezos-helm.git
-  HELM_BRANCH: main
+  HELM_BRANCH: production
   HELM_PROJECT_PATH: charts/landing-page-subscription-api
-  HELM_VALUES_FILE: values-stage.yaml
+  HELM_VALUES_FILE: values-prod.yaml
 
 defaults:
   run:
